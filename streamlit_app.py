@@ -4,6 +4,8 @@ from langchain_core.prompts import ChatPromptTemplate
 from langchain_openai import ChatOpenAI
 from langchain_community.vectorstores import FAISS
 from langchain_openai import OpenAIEmbeddings
+from langchain_core.messages import HumanMessage
+
 
 # Initialize the language model and prompt template
 llm = ChatOpenAI(model='gpt-4', max_tokens=100)
@@ -39,7 +41,8 @@ if st.button("Get Answer"):
 
         # Format and retrieve the answer from the LLM
         inputs = {"context": context_texts, "question": question}
-        answer = llm(prompt.format(**inputs))
+        formatted_prompt = prompt.format(**inputs)
+        answer = llm([HumanMessage(content=formatted_prompt)])
 
         # Display the answer
         st.write("Answer:", answer)
