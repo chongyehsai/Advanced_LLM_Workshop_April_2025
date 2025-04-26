@@ -45,6 +45,6 @@ if st.button("Get Answer"):
         answer = llm([HumanMessage(content=formatted_prompt)])
 
         # Display the answer
-        st.write("Answer:", answer)
+        st.write("Answer:", answer.content)
     else:
         st.write("Please enter a question.")
